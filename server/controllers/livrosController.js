@@ -9,6 +9,18 @@ class LivroController {
       res.status(500).json(err);
     }
   };
+
+  static cadastrarLivro = async (req, res) => {
+    try {
+      let livro = new livros(req.body);
+      await livro.save();
+      res.status(201).send(livro.toJSON());
+    } catch (err) {
+      res
+        .status(500)
+        .send({ message: `${err.message} - falha ao cadastrar livro.` });
+    }
+  };
 }
 
 export default LivroController;
