@@ -1,6 +1,5 @@
 import React from 'react';
 import api from '../api';
-// import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const Home = () => {
