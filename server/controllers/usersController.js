@@ -38,17 +38,21 @@ class UserController {
   static logarUser = async (req, res) => {
     const { username, password } = req.body;
     try {
-      const user = await user.findOne({ user });
+      const user = await users.findOne({ username });
 
       if (!user) {
-        return res.status(401).json({ message: 'Credenciais inválidas.' });
+        return res
+          .status(401)
+          .json({ message: 'Credenciais inválidas. USUARIO' });
       }
 
       if (password !== user.password) {
-        return res.status(401).json({ message: 'Credenciais inválidas' });
+        return res
+          .status(401)
+          .json({ message: 'Credenciais inválidas - PASSWORD' });
       }
 
-      req.session.user = user;
+      // req.session.user = user; DEIXA COMENTADO POR ENQUANTO
       res.json({ message: 'Login bem-sucedido' });
     } catch (err) {
       res.status(500).send({ message: `${err.message} - falha ao logar.` });

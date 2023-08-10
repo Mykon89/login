@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import api from '../api';
 
 const Login = () => {
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await api.post('/users', { user, password });
+      const response = await api.post('/login', { username, password });
       console.log(response.data); // Aqui você pode tratar a resposta da API conforme necessário
+      window.location.href = '/home';
     } catch (error) {
       console.error('Erro ao efetuar login:', error);
     }
@@ -20,8 +21,8 @@ const Login = () => {
       <input
         type="text"
         placeholder="Usuario"
-        value={user}
-        onChange={e => setUser(e.target.value)}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
       />
       <input
         type="password"
@@ -29,6 +30,7 @@ const Login = () => {
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
+
       <button onClick={handleLogin}>Entrar</button>
     </div>
   );
